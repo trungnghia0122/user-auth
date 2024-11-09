@@ -1,10 +1,29 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Menubar, MenubarMenu, MenubarTrigger } from "@/components/ui/menubar"
 
 import { Chart } from "@/components/chart"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
+import { useRouter } from "next/navigation"
 
 const UserPage = () => {
+  const router = useRouter()
   return (
     <div className='min-h-screen w-full pb-5 pt-10'>
       <nav className='px-4 md:px-8 lg:px-10 mt-4 pb-5 flex flex-col '>
@@ -12,11 +31,49 @@ const UserPage = () => {
           <h1 className='text-3xl md:text-4xl font-bold flex justify-start items-center'>
             Dashboard
           </h1>
-          <div className='flex items-center gap-4'>
-            <div className='h-10 w-10 rounded-full bg-slate-200 flex items-center justify-center'>
-              <span className='text-sm font-medium'>TT</span>
-            </div>
-          </div>
+
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant='outline'
+                className='h-10 w-10 rounded-full bg-slate-200 border-none'
+              >
+                TT
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className='w-56' align='end'>
+              <DropdownMenuLabel>
+                <div className='flex flex-col gap-1'>
+                  <span className='font-bold'>Tony Tran</span>
+                  <span className='text-xs text-gray-500'>
+                    trantony0122@gmail.com
+                  </span>
+                </div>
+              </DropdownMenuLabel>
+
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <DropdownMenuItem>
+                  Profile
+                  <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  Billing
+                  <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  Settings
+                  <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+              <DropdownMenuSeparator />
+
+              <DropdownMenuItem onClick={() => router.push("/login")}>
+                Log out
+                <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
         <span className='text-sm text-gray-500'>
           Welcome, <span className='font-bold'>Tony Tran</span>
